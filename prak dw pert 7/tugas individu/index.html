@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pendaftaran Kursus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="halaman">
+    <header class="kepala">
+      <h1>Pendaftaran Kursus</h1>
+      <p>Isi data di bawah ini untuk mendaftar. Kolom bertanda <span class="wajib">*</span> wajib diisi.</p>
+    </header>
+
+    <!-- action: tujuan data dikirim (sementara "#" karena belum ada backend)
+         method="post": data dikirim lewat body request, cocok untuk data pendaftaran -->
+    <form action="#" method="post" id="form-kursus">
+
+      <!-- 1. type="text" -->
+      <div class="field">
+        <label for="nama">Nama lengkap <span class="wajib">*</span></label>
+        <input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" required>
+      </div>
+
+      <!-- 2. type="email" -->
+      <div class="field">
+        <label for="email">Email <span class="wajib">*</span></label>
+        <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+      </div>
+
+      <!-- 3. type="password" -->
+      <div class="field">
+        <label for="password">Kata sandi <span class="wajib">*</span></label>
+        <div class="baris-password">
+          <input type="password" id="password" name="password" minlength="8" placeholder="Minimal 8 karakter" required>
+          <!-- Button biasa: tidak mengirim form, hanya menjalankan JavaScript -->
+          <button type="button" id="tombol-lihat" class="btn btn-sekunder">Lihat</button>
+        </div>
+      </div>
+
+      <!-- 4. type="number" -->
+      <div class="field">
+        <label for="usia">Usia</label>
+        <input type="number" id="usia" name="usia" min="10" max="80" placeholder="Contoh: 20">
+      </div>
+
+      <!-- 5. type="date" -->
+      <div class="field">
+        <label for="tanggal-mulai">Tanggal mulai kursus <span class="wajib">*</span></label>
+        <input type="date" id="tanggal-mulai" name="tanggal_mulai" required>
+      </div>
+
+      <!-- 6. type="tel" (tambahan) -->
+      <div class="field">
+        <label for="telepon">Nomor telepon</label>
+        <input type="tel" id="telepon" name="telepon" placeholder="08xxxxxxxxxx">
+      </div>
+
+      <div class="aksi">
+        <!-- Tiga jenis button: submit, reset, dan button biasa -->
+        <button type="submit" class="btn btn-utama">Daftar</button>
+        <button type="reset" class="btn btn-sekunder">Kosongkan form</button>
+        <button type="button" id="tombol-bantuan" class="btn btn-sekunder">Bantuan</button>
+      </div>
+
+      <p id="pesan" class="pesan" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <script>
+    // Button biasa #1: tampilkan / sembunyikan kata sandi
+    const inputPassword = document.getElementById('password');
+    const tombolLihat = document.getElementById('tombol-lihat');
+    tombolLihat.addEventListener('click', function () {
+      const tersembunyi = inputPassword.type === 'password';
+      inputPassword.type = tersembunyi ? 'text' : 'password';
+      tombolLihat.textContent = tersembunyi ? 'Sembunyikan' : 'Lihat';
+    });
+
+    // Button biasa #2: tampilkan petunjuk pengisian
+    const pesan = document.getElementById('pesan');
+    document.getElementById('tombol-bantuan').addEventListener('click', function () {
+      pesan.textContent = 'Isi semua kolom bertanda *, lalu tekan "Daftar". Tombol "Kosongkan form" menghapus semua isian.';
+    });
+
+    // Praktikum belum memakai backend: cegah halaman berpindah dan tampilkan data
+    document.getElementById('form-kursus').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      delete data.password; // jangan tampilkan kata sandi
+      pesan.textContent = 'Data siap dikirim: ' + JSON.stringify(data);
+    });
+  </script>
+</body>
+</html>

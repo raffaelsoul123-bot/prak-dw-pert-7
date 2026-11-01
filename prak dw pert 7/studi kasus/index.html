@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototipe Form Penerimaan Mahasiswa Baru</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="halaman">
+    <header class="kepala">
+      <h1>Penerimaan Mahasiswa Baru</h1>
+      <p>Lengkapi data calon mahasiswa. Semua kolom wajib diisi.</p>
+    </header>
+
+    <!-- action diisi alamat backend nanti (mis. "/api/pendaftaran").
+         method="post" dipilih karena ada data pribadi dan kata sandi.
+         Catatan: keamanan tetap butuh HTTPS dan validasi di server. -->
+    <form action="#" method="post" id="form-pmb">
+
+      <div class="field">
+        <label for="nama">Nama lengkap</label>
+        <input type="text" id="nama" name="nama" autocomplete="name" placeholder="Contoh: Siti Aminah" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="nama@email.com" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Kata sandi</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" aria-describedby="bantuan-password" required>
+        <small id="bantuan-password">Minimal 8 karakter.</small>
+      </div>
+
+      <div class="field">
+        <label for="nilai">Nilai rata-rata rapor</label>
+        <input type="number" id="nilai" name="nilai" min="0" max="100" step="0.01" aria-describedby="bantuan-nilai" required>
+        <small id="bantuan-nilai">Skala 0&ndash;100. Gunakan titik untuk desimal.</small>
+      </div>
+
+      <div class="field">
+        <label for="tanggal-lahir">Tanggal lahir</label>
+        <input type="date" id="tanggal-lahir" name="tanggal_lahir" required>
+      </div>
+
+      <div class="aksi">
+        <button type="submit" class="btn btn-utama">Kirim pendaftaran</button>
+        <button type="reset" class="btn btn-sekunder">Kosongkan form</button>
+      </div>
+
+      <p id="pesan" class="pesan" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <script>
+    // Prototipe: backend belum ada, jadi pengiriman ditahan dan data (tanpa kata sandi) ditampilkan.
+    document.getElementById('form-pmb').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      delete data.password;
+      document.getElementById('pesan').textContent =
+        'Data valid dan siap dikirim ke backend: ' + JSON.stringify(data);
+    });
+
+    // Pengguna perlu konfirmasi sebelum semua isian terhapus
+    document.getElementById('form-pmb').addEventListener('reset', function (e) {
+      if (!confirm('Hapus semua isian?')) e.preventDefault();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+:root {
+  --latar: #f3efe6;
+  --kartu: #ffffff;
+  --teks: #23201b;
+  --teks-lembut: #655f55;
+  --garis: #cfc8b8;
+  --aksen: #1f5f5b;
+  --aksen-gelap: #174744;
+  --bahaya: #a23b2a;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--latar);
+  color: var(--teks);
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+ 
+.halaman {
+  max-width: 34rem;
+  margin: 0 auto;
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+}
+ 
+.kepala h1 {
+  margin: 0 0 .35rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+ 
+.kepala p {
+  margin: 0 0 1.5rem;
+  color: var(--teks-lembut);
+}
+ 
+.wajib { color: var(--bahaya); }
+ 
+.field { margin-bottom: 1.1rem; }
+ 
+label {
+  display: block;
+  margin-bottom: .35rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+ 
+input {
+  width: 100%;
+  padding: .65rem .75rem;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--garis);
+  border-radius: 6px;
+}
+ 
+input:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid #f0b429;
+  outline-offset: 1px;
+}
+ 
+input:focus { border-color: var(--aksen); }
+ 
+.baris-password {
+  display: flex;
+  gap: .5rem;
+}
+.baris-password input { flex: 1; }
+ 
+.aksi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.5rem;
+}
+ 
+.btn {
+  padding: .65rem 1.1rem;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+ 
+.btn-utama {
+  background: var(--aksen);
+  color: #fff;
+}
+.btn-utama:hover { background: var(--aksen-gelap); }
+ 
+.btn-sekunder {
+  background: #fff;
+  color: var(--aksen);
+  border-color: var(--aksen);
+}
+.btn-sekunder:hover { background: #e9f1f0; }
+ 
+.pesan {
+  margin: 1.25rem 0 0;
+  min-height: 1.5rem;
+  color: var(--teks-lembut);
+  font-size: .95rem;
+  word-break: break-word;
+}
+ 
+@media (max-width: 480px) {
+  .halaman { padding: 1.5rem 1.1rem; }
+  .btn { flex: 1 1 100%; }
+  .baris-password .btn { flex: 0 0 auto; }
+}
